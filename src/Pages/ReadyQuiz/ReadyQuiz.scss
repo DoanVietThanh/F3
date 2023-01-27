@@ -1,0 +1,48 @@
+.desktop3 {
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 100px;
+  overflow: hidden;
+  &_capture {
+    width: 504px;
+    height: 504px;
+    margin-left: 20%;
+  }
+  &_info {
+    width: 45%;
+  }
+  &_para {
+    margin-top: 34px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    color: #21222d;
+  }
+  &_list {
+    list-style: none;
+    padding: 0;
+  }
+  &_item {
+    padding: 16px 0;
+  }
+  &_icon {
+    color: #33bd64;
+    padding-right: 16px;
+    font-size: 18px;
+  }
+  &_btn {
+    color: #ffff;
+    background: #33bd64;
+    border-radius: 12px;
+    border: none;
+    text-transform: uppercase;
+    width: 308px;
+    height: 54px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+}

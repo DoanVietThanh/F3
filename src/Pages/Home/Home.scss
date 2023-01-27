@@ -1,0 +1,29 @@
+.desktop2 {
+  display: flex;
+  height: 100vh;
+  margin: auto;
+  gap: 10px;
+  &_info {
+    width: 50%;
+  }
+  &_capture {
+    width: 50%;
+  }
+  &_input {
+    width: 100%;
+    padding: 16px 0;
+    background: #eeeeee;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: none;
+  }
+  &_btn {
+    width: 100%;
+    background: #33bd64;
+    border-radius: 12px;
+    padding: 16px 135px;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+  }
+}

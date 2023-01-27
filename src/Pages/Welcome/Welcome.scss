@@ -1,0 +1,28 @@
+.welcome {
+  text-align: center;
+  &_logo {
+    margin-top: 211px;
+    width: 200px;
+  }
+  &_para {
+    margin-top: 200px;
+    margin-bottom: 40px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+  }
+  &_iq {
+    color: #33bd64;
+  }
+  &_btn {
+    background-color: #33bd64;
+    color: #fff;
+    padding: 16px 135px;
+    gap: 10px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+}
