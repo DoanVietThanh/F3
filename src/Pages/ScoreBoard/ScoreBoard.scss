@@ -1,0 +1,42 @@
+.scoreboard {
+  padding: 50px 100px;
+  text-align: center;
+  height: 100vh;
+  &-logo > img {
+    width: 160px;
+  }
+  &-heading {
+    padding: 20px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    color: #21222d;
+  }
+  &-rank {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #7b7b81;
+  }
+  &-table {
+    margin-top: 20px;
+    width: 100%;
+    &-info {
+      background-color: #33bd64;
+      color: #fff;
+    }
+    &-info td {
+      font-size: 18px;
+      border: 1px #fff solid;
+    }
+    tbody {
+      border-bottom: 1px #7b7b81 solid;
+      height: 50px;
+    }
+    td {
+      margin: 0 1px;
+    }
+  }
+}

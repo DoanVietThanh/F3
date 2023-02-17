@@ -1,14 +1,21 @@
 .desktop3 {
   margin: auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 100px;
-  overflow: hidden;
+  &_container {
+    display: flex;
+    height: 100%;
+    padding: 100px;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+  }
+  &_logo {
+    display: none;
+  }
   &_capture {
     width: 504px;
     height: 504px;
     margin-left: 20%;
+    margin-right: 5%;
   }
   &_info {
     width: 45%;
@@ -44,5 +51,54 @@
     height: 54px;
     cursor: pointer;
     font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 63.9375em) {
+  .desktop3 {
+    &_logo {
+      margin: 30px 0;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+    &_container {
+      flex-direction: column;
+      padding: 10px;
+    }
+    &_capture {
+      width: 300px;
+      height: 300px;
+      margin: 0;
+    }
+    &_para {
+      text-align: center;
+    }
+    &_btn {
+      text-align: center;
+      margin: auto;
+      width: 100%;
+    }
+    &_logo2 {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  .desktop3 {
+    &_logo {
+      margin: 10px 0;
+    }
+    &_container {
+      padding: 20px;
+    }
+    &_capture {
+      width: 240px;
+      height: 240px;
+    }
+    &_info {
+      width: 100%;
+    }
   }
 }

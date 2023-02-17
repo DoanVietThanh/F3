@@ -1,0 +1,60 @@
+.modal-dialog .modal-lg .modal-dialog-centered {
+  width: 300px;
+}
+.submit {
+  &-header {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.6;
+    color: #21222d;
+    & span {
+      color: #33bd64;
+    }
+  }
+
+  &-body {
+    p {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #7b7b81;
+      span {
+        color: #33bd64;
+      }
+    }
+
+    div {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #7b7b81;
+    }
+  }
+
+  &-footer {
+    button {
+      margin-left: 20px;
+      border: none;
+      padding: 6px 20px;
+      border-radius: 4px;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+      &:nth-child(1) {
+        color: #33bd64;
+        background-color: none;
+      }
+      &:nth-child(2) {
+        color: #fff;
+        background-color: #33bd64;
+      }
+    }
+  }
+}

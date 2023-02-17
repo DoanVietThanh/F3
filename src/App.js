@@ -1,18 +1,28 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import Home from './Pages/Home/Home';
 import Quiz from './Pages/Quiz/Quiz';
 import ReadyQuiz from './Pages/ReadyQuiz/ReadyQuiz';
+import Result from './Pages/Result/Result';
 import Welcome from './Pages/Welcome/Welcome';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ScoreBoard from './Pages/ScoreBoard/ScoreBoard';
 function App() {
   const [name, setName] = useState('');
   const [id, setId] = useState('');
-  const user = {
+  const [question, setQuestion] = useState();
+
+  const user = JSON.parse(localStorage.getItem('userQuiz')) || {
     name: name,
     studentID: id,
   };
+
+  const client = axios.create({
+    baseURL: 'https://iq-api.onrender.com',
+  });
+
   return (
     <div className='App'>
       <Routes>
@@ -21,6 +31,7 @@ function App() {
           path='/home'
           element={
             <Home
+              client={client}
               user={user}
               name={name}
               setName={setName}
@@ -29,8 +40,30 @@ function App() {
             />
           }
         />
-        <Route path='/ready' element={<ReadyQuiz />} />
-        <Route path='/quiz' element={<Quiz />} />
+        <Route
+          path='/ready'
+          element={
+            <ReadyQuiz
+              client={client}
+              user={user}
+              question={question}
+              setQuestion={setQuestion}
+            />
+          }
+        />
+        <Route
+          path='/quiz'
+          element={
+            <Quiz
+              client={client}
+              // user={user}
+              // question={question}
+              // setQuestion={setQuestion}
+            />
+          }
+        />
+        <Route path='/result' element={<Result client={client} />} />
+        <Route path='/scoreboard' element={<ScoreBoard client={client} />} />
       </Routes>
     </div>
   );
