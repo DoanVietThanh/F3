@@ -8,17 +8,15 @@ const Welcome = () => {
   }, []);
   const navigate = useNavigate();
   return (
-    <div>
-      <div className='welcome'>
-        <img src={logo} className='welcome_logo' alt='logo' />
-        <div className='welcome_para'>
-          Chào mừng các bạn tân sinh viên K18 đến với <br />
-          <span className='welcome_iq'>IQ Challenge</span> do CLB F-Code tổ chức
-        </div>
-        <button className='welcome_btn' onClick={() => navigate('/home')}>
-          BẮT ĐẦU
-        </button>
+    <div className='welcome'>
+      <img src={logo} className='welcome_logo' alt='logo' />
+      <div className='welcome_para'>
+        Chào mừng các bạn tân sinh viên K18 đến với <br />
+        <span className='welcome_iq'>IQ Challenge</span> do CLB F-Code tổ chức
       </div>
+      <button className='welcome_btn' onClick={() => navigate('/home')}>
+        BẮT ĐẦU
+      </button>
     </div>
   );
 };

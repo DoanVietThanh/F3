@@ -3,6 +3,9 @@
   height: 100vh;
   background-color: #f2f2f2;
   overflow: hidden;
+  &_logo {
+    display: none;
+  }
   &_nav {
     height: 100vh;
     text-align: center;
@@ -42,13 +45,7 @@
         text-decoration: none;
         color: #bdbdbd;
       }
-      // a.active {
-      //   color: #0dff92;
-      // }
-      a.active.numQuestion_1 {
-        color: #0dff92;
-      }
-      a.active.numQuestion_2 {
+      a.active {
         color: #0dff92;
       }
     }
@@ -97,10 +94,10 @@
 
     &_content {
       width: 50%;
-      padding: 40px 60px;
+      padding: 30px 30px 0 30px;
       img {
-        margin: auto;
-        height: 240px;
+        width: 68%;
+        height: 68%;
       }
     }
 
@@ -117,7 +114,7 @@
       font-family: 'Inter';
       font-style: normal;
       font-weight: 400;
-      font-size: 24px;
+      font-size: 20px;
       line-height: 1.6;
       color: #21222d;
       margin: 18px 0 15px;
@@ -143,13 +140,6 @@
       background-color: #eeee;
     }
 
-    &_item {
-      display: flex;
-      margin: 10px 0;
-      border-radius: 20px;
-      background-color: #f5f5f5;
-    }
-
     input {
       position: absolute;
       visibility: hidden;
@@ -159,6 +149,14 @@
       background-color: #0dff92;
     }
 
+    &_item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+      border-radius: 20px;
+      background-color: #f5f5f5;
+    }
     &_label {
       font-family: 'Inter';
       font-style: normal;
@@ -168,6 +166,16 @@
       width: 100%;
       border-radius: 20px;
       padding: 10px;
+      margin: 0;
+      display: flex; 
+      div {
+        width: 20px;
+        border-radius: 50%;
+        margin-right: 16px;
+        background-color: #fff;
+        padding-left: 16px;
+        padding-right: 30px;
+      } 
     }
     &_label:hover {
       cursor: pointer;
@@ -188,9 +196,23 @@
     color: #bdbdbd;
   }
 }
-
+.mobile-quiz {
+  display: none;
+}
 @media only screen and (max-width: 63.9375em) {
+  // .challenge {
+  //   display: none;
+  // }
+  // .mobile-quiz {
+  //   display: block;
+  // }
 }
 
 @media only screen and (max-width: 46.1875em) {
+  .challenge {
+    display: none;
+  }
+  .mobile-quiz {
+    display: block;
+  }
 }

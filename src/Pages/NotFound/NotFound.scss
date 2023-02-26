@@ -1,0 +1,17 @@
+.notfound {
+  padding: unset;
+  margin: unset;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 18vw;
+    margin: 20px 0;
+  }
+  &_info {
+    font-size: 30px;
+    font-weight: 600;
+  }
+}

@@ -1,12 +1,14 @@
 .welcome {
   text-align: center;
   height: 100vh;
+  // overflow-y: hidden;
+  overflow-y: hidden;
   &_logo {
-    margin-top: 200px;
+    margin-top: 2%;
     width: 200px;
   }
   &_para {
-    margin-top: 180px;
+    margin-top: 10%;
     margin-bottom: 40px;
     font-family: 'Inter';
     font-style: normal;
@@ -29,66 +31,17 @@
 }
 @media only screen and (max-width: 46.1875em) {
   .welcome {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     &_logo {
-      margin-top: 60px;
+      margin-top: 5%;
       width: 200px;
     }
     &_para {
-      margin-top: 80px;
+      margin-top: 5%;
     }
   }
-}
-
-.container ul {
-  list-style: none;
-}
-ul li {
-  color: #aaaaaa;
-}
-
-ul li input[type='radio'] {
-  // position: absolute;
-  visibility: hidden;
-}
-
-ul li label {
-  display: block;
-  cursor: pointer;
-  background-color: #33bd64;
-  -webkit-transition: all 0.25s linear;
-  width: 200px;
-  color: #000;
-}
-ul li .check {
-  display: block;
-  position: absolute;
-  border: 5px solid #aaaaaa;
-  border-radius: 100%;
-  height: 25px;
-  width: 25px;
-  top: 30px;
-  left: 20px;
-  z-index: 5;
-  transition: border 0.25s linear;
-  -webkit-transition: border 0.25s linear;
-}
-ul li .check::before {
-  display: block;
-  position: absolute;
-  content: '';
-  border-radius: 100%;
-  height: 15px;
-  width: 15px;
-  top: 5px;
-  left: 5px;
-  margin: auto;
-  transition: background 0.25s linear;
-  -webkit-transition: background 0.25s linear;
-  background-color: red;
-}
-input[type='radio']:checked ~ .check {
-  border: 5px solid #0dff92;
-}
-input[type='radio']:checked ~ .check::before {
-  background: #560dff;
 }

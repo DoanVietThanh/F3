@@ -1,0 +1,50 @@
+.mobile {
+  &_quiz {
+    width: 100%;
+    overflow: hidden;
+  }
+  &_logo {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+  }
+  &_num {
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: visible;
+    &_item {
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      padding: 8px 30px;
+      white-space: nowrap;
+      margin: 0 6px;
+      background-color: #33bd64;
+      border-radius: 10px;
+      a {
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
+  }
+}
+body {
+  padding: 10px;
+}
+
+footer {
+  button {
+    color: #33bd64;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    border: none;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-color: unset;
+  }
+}
