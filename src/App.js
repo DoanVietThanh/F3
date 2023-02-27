@@ -21,7 +21,7 @@ function App() {
   };
 
   const client = axios.create({
-    baseURL: 'https://iq-api.onrender.com',
+    baseURL: 'https://iqapi.hdang09.site',
   });
 
   return (

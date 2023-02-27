@@ -13,7 +13,16 @@ const ReadyQuiz = ({ client, user, question, setQuestion }) => {
     client
       .post('/user/register', user)
       .then((res) => {
-        console.log(res);
+        toast.success('Login Successfully !', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
       })
       .catch((e) => {
         console.log(e);
@@ -28,7 +37,7 @@ const ReadyQuiz = ({ client, user, question, setQuestion }) => {
       .then((response) => {
         toast.success('🦄 Wow so easy!', {
           position: 'top-right',
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -77,6 +86,18 @@ const ReadyQuiz = ({ client, user, question, setQuestion }) => {
         </div>
       </div>
 
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
       <ToastContainer />
     </div>
   );

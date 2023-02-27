@@ -1,8 +1,11 @@
 .welcome {
+  display: flex;
+  align-items: center;
   text-align: center;
   height: 100vh;
-  // overflow-y: hidden;
-  overflow-y: hidden;
+  &_wrap {
+    margin: auto;
+  }
   &_logo {
     margin-top: 2%;
     width: 200px;
@@ -27,21 +30,5 @@
     border: none;
     border-radius: 12px;
     cursor: pointer;
-  }
-}
-@media only screen and (max-width: 46.1875em) {
-  .welcome {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    &_logo {
-      margin-top: 5%;
-      width: 200px;
-    }
-    &_para {
-      margin-top: 5%;
-    }
   }
 }

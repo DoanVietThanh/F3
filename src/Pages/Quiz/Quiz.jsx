@@ -7,16 +7,29 @@ import Timer from '../../components/Timer/Timer';
 import './Quiz.scss';
 import logo from '../../../src/images/miniLogo.png';
 import MobileQuiz from './MobileQuiz';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Quiz = ({ client }) => {
-  const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
   const [active, setActive] = useState('');
   const [answer, setAnswer] = useState([
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
+  const navigate = useNavigate();
   const answerOptions = ['A', 'B', 'C', 'D', 'E'];
   const numOfQuestion = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  useEffect(() => {
+    toast.success('Good Luck !', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: 'light',
+    });
+  }, []);
 
   const saveAnswer = (indexQuestion, index) => {
     const tempAnswer = [...answer];
@@ -43,7 +56,6 @@ const Quiz = ({ client }) => {
   };
   return (
     <>
-      {' '}
       <div className='challenge'>
         {/* Challenge Navbar */}
         <div className='challenge_logo'>
@@ -63,7 +75,7 @@ const Quiz = ({ client }) => {
             <h2>Câu hỏi</h2>
             <div className='challenge_nav_numItem'>
               {numOfQuestion.map((num, index) => (
-                <div style={{ margin: '10px 0' }}>
+                <div style={{ margin: '10px 0' }} key={index}>
                   <a
                     key={index}
                     href={`#${index + 1}`}
@@ -96,18 +108,21 @@ const Quiz = ({ client }) => {
               <div
                 key={indexQuestion}
                 className='challenge_questions_container'
-                id={indexQuestion + 1}
+                id={indexQuestion + 1} // connect with tag a
               >
                 <div className='challenge_questions_content'>
                   <div className='challenge_questions_number'>
                     Câu hỏi số {indexQuestion + 1}
                   </div>
                   <div className='challenge_questions_title'>
-                    {item.question[0]}
+                    {item.question.map((ques, index) =>
+                      JSON.stringify(ques).match('/images/[a-zA-Z0-9.]{1,}') ? (
+                        <img src={item.question[index]} />
+                      ) : (
+                        <div>{ques}</div>
+                      )
+                    )}
                   </div>
-                  {item.question[1] && (
-                    <img src={`${item.question[1]}`} alt='' />
-                  )}
                 </div>
 
                 <div className='challenge_questions_options'>
@@ -129,7 +144,9 @@ const Quiz = ({ client }) => {
                           htmlFor={`${item._id}${index}`}
                           className='challenge_questions_label'
                         >
-                          <div>{answerOptions[index]} </div>
+                          <div className='answer_options'>
+                            {answerOptions[index]}{' '}
+                          </div>
                           {answer}
                         </label>
                       </div>
@@ -148,7 +165,27 @@ const Quiz = ({ client }) => {
           onClick={handleNavigate}
         />
       </div>
-      <MobileQuiz client={client} handleNavigate={handleNavigate} />
+      <MobileQuiz
+        client={client}
+        handleNavigate={handleNavigate}
+        answerOptions={answerOptions}
+        numOfQuestion={numOfQuestion}
+        answer={answer}
+        setAnswer={setAnswer}
+      />
+
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme='light'
+      />
     </>
   );
 };

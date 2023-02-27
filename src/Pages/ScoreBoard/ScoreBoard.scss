@@ -39,4 +39,35 @@
       margin: 0 1px;
     }
   }
+  &-active {
+    font-weight: 500;
+    color: #33bd64;
+    background-color: #e2f0e4;
+  }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  .scoreboard {
+    justify-self: center;
+    justify-items: center;
+    width: 100vw;
+    padding: 0;
+    margin: 10px 0 0 0;
+    position: relative;
+    height: 0;
+    transform: scale(0.8);
+
+    &-logo > img {
+      width: 90px;
+    }
+    &-heading {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+    &-table {
+      position: absolute;
+      right: -15px;
+    }
+  }
 }

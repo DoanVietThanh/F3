@@ -2,10 +2,10 @@
   padding-top: 120px;
   padding-left: 200px;
 }
-.desktop2 {
+.home {
   display: flex;
   height: 100%;
-  gap: 10px;
+  gap: 40px;
   padding: 0 160px 0 200px;
   &_info {
     width: 380px;
@@ -48,21 +48,21 @@
 }
 
 @media only screen and (max-width: 46.1875em) {
-  .desktop2_container {
-    margin: 10px;
+  .home_container {
   }
   .logo {
     padding: 0;
     margin: 10px auto 0;
     text-align: center;
   }
-  .desktop2 {
+  .home {
+    width: 100vw;
     padding: 0;
     gap: 0;
     flex-direction: column-reverse;
     align-items: center;
     &_capture > img {
-      width: 300px;
+      width: 260px;
     }
     &_info {
       width: 300px;
@@ -107,12 +107,15 @@
     margin: 40px auto 0;
     text-align: center;
   }
-  .desktop2 {
+  .home {
     padding: 0;
     flex-direction: column-reverse;
     align-items: center;
     &_capture > img {
       width: 400px;
+    }
+    &_input {
+      margin: 10px 0;
     }
   }
 }

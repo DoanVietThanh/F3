@@ -6,72 +6,97 @@ import SubmitModal from '../../components/ModalSubmit/Submit';
 import Timer from '../../components/Timer/Timer';
 import './MobileQuiz.scss';
 
-const MobileQuiz = ({ client, handleNavigate }) => {
+const MobileQuiz = ({
+  client,
+  handleNavigate,
+  answerOptions,
+  numOfQuestion,
+  answer,
+  setAnswer,
+}) => {
   const navigate = useNavigate();
   const questionList = [...JSON.parse(localStorage.getItem('questionQuiz'))];
   const [current, setCurrent] = useState(0);
-  const [answer, setAnswer] = useState([
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  ]);
   const [currentQuestion, setCurrentQuestion] = useState();
-  const answerOptions = ['A', 'B', 'C', 'D', 'E'];
-  const numOfQuestion = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
+  const [checkRadio, setCheckRadio] = useState(false);
   useEffect(() => {
     setCurrentQuestion(questionList[current]);
   }, [current]);
 
-  const handleNext = () => {
-    setCurrent(current + 1);
+  const saveAnswerMobile = (current, index) => {
+    const tempAnswer = [...answer];
+    tempAnswer[current] = index + 1;
+    setAnswer(tempAnswer);
+    setCheckRadio(true);
   };
 
+  const handleNextMobile = () => {
+    setCurrent(current + 1);
+    setCheckRadio();
+  };
+
+  console.log(questionList[current]);
+  console.log(answer);
   return (
-    <div className='mobile-quiz'>
-      <header className='mobile-header'>
-        <div className='mobile_logo'>
+    <div className='mobile_quiz'>
+      <header className='mobile_header'>
+        <div className='mobile_header_logo'>
           <img src={miniLogo} alt='Logo FCode' />
         </div>
-
-        <div className='mobile_num'>
+        <div className='mobile_header_num'>
           {numOfQuestion.map((num, index) => (
             <div
-              className='mobile_num_item'
+              className='mobile_header_numItem'
               key={index}
-              style={{ width: '50px' }}
+              onClick={() => setCurrent(index)}
             >
-              <a
-                key={index}
-                href={`#${index + 1}`}
-                className={`${answer[index] && 'active'}`}
-              >
+              <a key={index} href={`#${index + 1}`}>
                 Câu {num}
               </a>
             </div>
           ))}
         </div>
-        <div>Timer</div>
+        <Timer />
       </header>
 
-      <body className='mobile-body'>
-        <p>{questionList[current].question[0]}</p>
-        {questionList[current].question[1] && (
-          <img
-            src={`${questionList[current].question[1]}`}
-            alt=''
-            style={{ maxWidth: '90vw' }}
-          />
-        )}
-        <div className='challenge_questions_options'>
+      <body className='mobile_body'>
+        <p>Câu {current + 1} :</p>
+        <div className=''>
+          {questionList[current].question.map((ques, index) =>
+            JSON.stringify(ques).match('/images/[a-zA-Z0-9.]{1,}') ? (
+              <img
+                alt=''
+                key={index}
+                style={{ width: '100%' }}
+                src={questionList[current].question[index]}
+              />
+            ) : (
+              <div>{ques}</div>
+            )
+          )}
+        </div>
+
+        <div className='mobile_body_answer'>
           <form action=''>
             {questionList[current].multipleChoice.map((answer, index) => (
-              <div className='challenge_questions_item' key={index}>
+              <div className='mobile_body_answerItem' key={index}>
                 <input
                   type='radio'
                   value={index}
                   name={questionList[current]._id}
+                  id={`${questionList[current]._id}_${index}`}
+                  onClick={() => {
+                    saveAnswerMobile(current, index);
+                  }}
                 />
-                <label htmlFor={``} className='challenge_questions_label'>
-                  <span>{answerOptions[index]} .</span> {answer}
+                <label
+                  htmlFor={`${questionList[current]._id}_${index}`}
+                  className={`${checkRadio && 'active'}`}
+                >
+                  <div className='mobile_body_aphabet'>
+                    <span>{answerOptions[index]}</span>
+                  </div>
+                  <div className='mobile_body_answerP'>{answer}</div>
                 </label>
               </div>
             ))}
@@ -79,10 +104,10 @@ const MobileQuiz = ({ client, handleNavigate }) => {
         </div>
       </body>
 
-      <footer>
-        <div className='mobile-footer'>
+      <footer className='mobile_footer'>
+        <div>
           {current != questionList.length - 1 ? (
-            <button onClick={handleNext} className='mobile_btn'>
+            <button onClick={handleNextMobile} className='mobile_btn'>
               Tiếp tục
             </button>
           ) : (

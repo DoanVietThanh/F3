@@ -73,6 +73,7 @@
     display: none;
   }
   .result {
+    overflow: hidden;
     &-wrapper {
       margin: 0;
       flex-direction: column;
@@ -80,6 +81,9 @@
     &-cup {
       display: flex;
       justify-content: center;
+      img {
+        width: 300px;
+      }
     }
   }
 }
@@ -87,19 +91,28 @@
 @media only screen and (max-width: 46.1875em) {
   .logoResult {
     display: block;
-    margin: 20px;
+    margin: 20px 0;
   }
   .logoResult2 {
     display: none;
   }
   .result {
-    &-wrapper {
-      margin: 0;
-      flex-direction: column;
+    &-container {
+      position: relative;
     }
-    &-cup {
-      display: flex;
-      justify-content: center;
+    &-info {
+      &-title {
+        width: 90%;
+        font-size: 24px;
+      }
+    }
+    &-wrapper {
+      width: 100vw;
+      transform: scale(0.7);
+      position: absolute;
+      top: -60px;
+      right: 0;
+      left: 0;
     }
   }
 }

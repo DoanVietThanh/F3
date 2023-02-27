@@ -1,50 +1,168 @@
-.mobile {
-  &_quiz {
-    width: 100%;
-    overflow: hidden;
-  }
-  &_logo {
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;
-  }
-  &_num {
-    display: flex;
-    width: 100%;
-    overflow: scroll;
-    overflow-x: visible;
-    &_item {
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      padding: 8px 30px;
-      white-space: nowrap;
-      margin: 0 6px;
-      background-color: #33bd64;
-      border-radius: 10px;
-      a {
-        color: #fff;
-        font-weight: 700;
-        text-decoration: none;
+@media only screen and (max-width: 46.1875em) {
+  .mobile {
+    &_quiz {
+      display: block;
+    }
+
+    &_header {
+      padding: 10px 4px;
+      &_logo {
+        display: flex;
+        justify-content: center;
+      }
+      &_num {
+        display: flex;
+        overflow-x: scroll;
+        gap: 10px;
+        scrollbar-width: thin;
+        /* width */
+        &::-webkit-scrollbar {
+          height: 6px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px transparent;
+          background-color: #eee;
+          border-radius: 10px;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: #74d696;
+          border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background: #74d696;
+        }
+      }
+
+      &_numItem {
+        margin: 20px 0;
+        height: 35px;
+        width: 80px;
+        background: #33bd64;
+        border-radius: 50px;
+        padding: 0 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        a {
+          cursor: pointer;
+          color: #fff;
+          text-decoration: none;
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
+        }
+      }
+    }
+
+    &_body {
+      margin-bottom: 50px;
+      padding: 6px;
+      &_question {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        color: #21222d;
+      }
+      &_picture > img {
+        max-width: 90vw;
+      }
+      &_answer {
+        width: 100%;
+      }
+      &_answerItem {
+        margin: 20px 0;
+        width: 356px;
+        height: 56px;
+        background: #f5eeee;
+        border-radius: 42px;
+        overflow: hidden;
+        label {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          padding-left: 20px;
+        }
+        input {
+          position: absolute;
+          visibility: hidden;
+        }
+        input[type='radio']:checked ~ label.active {
+          background-color: #0dff92;
+        }
+        // label.active {
+        //   background-color: #0dff92;
+        // }
+      }
+      &_aphabet {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        width: 40px;
+        height: 40px;
+        background: #ffffff;
+        border-radius: 21px;
+        margin-right: 10px;
+        margin-left: -8px;
+        span {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+          text-align: center;
+          color: #21222d;
+        }
+      }
+      &_answerP {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #21222d;
+      }
+    }
+
+    &_footer {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      & > div {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        background-color: #fff;
+        & > button {
+          background-color: transparent;
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 30px;
+          color: #33bd64;
+          cursor: pointer;
+          width: 100%;
+        }
       }
     }
   }
-}
-body {
-  padding: 10px;
-}
-
-footer {
-  button {
-    color: #33bd64;
-    font-family: 'Inter';
+  .timer {
+    margin-top: 20px;
     font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 20px;
     line-height: 24px;
-    border: none;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    background-color: unset;
+    color: #bdbdbd;
   }
 }

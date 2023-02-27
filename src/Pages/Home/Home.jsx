@@ -9,34 +9,34 @@ import './Home.scss';
 const Home = ({ client, user, name, setName, id, setId }) => {
   const navigate = useNavigate();
   const handleRegister = () => {
-    // if (name.match('[a-z A-Z]$') && id.match('^SE[0-9]{6}$')) {
-    //   localStorage.setItem('userQuiz', JSON.stringify(user));
-    //   navigate('/ready');
-    // } else {
-    //   toast.warn('Invalid Input', {
-    //     position: 'top-right',
-    //     autoClose: 3000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: 'light',
-    //   });
-    // }
-    localStorage.setItem('userQuiz', JSON.stringify(user));
-    navigate('/ready');
+    if (name.match('[a-z A-Z]$') && id.match('^SE[0-9]{6}$')) {
+      localStorage.setItem('userQuiz', JSON.stringify(user));
+      navigate('/ready');
+    } else {
+      toast.warn('Invalid Input', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+    // localStorage.setItem('userQuiz', JSON.stringify(user));
+    // navigate('/ready');
   };
 
   return (
-    <div className='desktop2_container'>
+    <div className='home_container'>
       <div className='logo'>
         <img src={miniLogo} alt='Logo FCode' />
       </div>
-      <div className='desktop2'>
-        <div className='desktop2_info'>
+      <div className='home'>
+        <div className='home_info'>
           {/* <img src={miniLogo} alt='Logo FCode' /> */}
-          <p className='desktop2_info_heading'>
+          <p className='home_info_heading'>
             Nhập <span>MSSV</span> của bạn
           </p>
           <p>
@@ -47,24 +47,24 @@ const Home = ({ client, user, name, setName, id, setId }) => {
           <input
             type='text'
             placeholder='NGUYEN VAN A'
-            className='desktop2_input'
+            className='home_input'
             onChange={(e) => setName(e.target.value)}
           />
           <input
             type='text'
             placeholder='SE180000'
-            className='desktop2_input'
+            className='home_input'
             onChange={(e) => setId(e.target.value)}
           />
           <button
-            className='desktop2_btn'
+            className='home_btn'
             onClick={handleRegister}
             disabled={false}
           >
             tiếp tục
           </button>
         </div>
-        <div className='desktop2_capture'>
+        <div className='home_capture'>
           <img src={desktop2} />
         </div>
       </div>

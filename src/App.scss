@@ -1,5 +1,10 @@
-@import '~bootstrap/scss/bootstrap';
-
+// @import '~bootstrap/scss/bootstrap';
+.App,
+html,
+* {
+  padding: 0;
+  margin: 0;
+}
 .button {
   --color: #6a5af9;
   font-family: 'Poppins', sans-serif;

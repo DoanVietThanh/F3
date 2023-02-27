@@ -19,6 +19,7 @@ const Result = ({ client }) => {
       .catch((e) => console.log(e));
   }, []);
 
+  console.log(score, time);
   return (
     <div className='result-container'>
       <div className='logoResult'>
