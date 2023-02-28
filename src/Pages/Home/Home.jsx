@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import desktop2 from '../../../src/images/desktop2.png';
 import miniLogo from '../../../src/images/miniLogo.png';
+import pen from '../../../src/images/pen.png';
 import './Home.scss';
 
 const Home = ({ client, user, name, setName, id, setId }) => {
@@ -44,18 +45,24 @@ const Home = ({ client, user, name, setName, id, setId }) => {
             cứu kết quả sau khi hoàn thành
           </p>
 
-          <input
-            type='text'
-            placeholder='NGUYEN VAN A'
-            className='home_input'
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type='text'
-            placeholder='SE180000'
-            className='home_input'
-            onChange={(e) => setId(e.target.value)}
-          />
+          <div className='home_input_container'>
+            <input
+              type='text'
+              placeholder='NGUYEN VAN A'
+              className='home_input'
+              onChange={(e) => setName(e.target.value)}
+            />
+            <img src={pen} alt='' />
+          </div>
+          <div className='home_input_container'>
+            <input
+              type='password'
+              placeholder='SE180000'
+              className='home_input'
+              onChange={(e) => setId(e.target.value)}
+            />
+            <img src={pen} alt='' />
+          </div>
           <button
             className='home_btn'
             onClick={handleRegister}

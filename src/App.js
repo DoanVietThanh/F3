@@ -10,6 +10,7 @@ import Welcome from './Pages/Welcome/Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ScoreBoard from './Pages/ScoreBoard/ScoreBoard';
 import NotFound from './Pages/NotFound/NotFound';
+import TestQuiz from './Pages/Quiz/TestQuiz';
 function App() {
   const [name, setName] = useState('');
   const [id, setId] = useState('');
@@ -65,6 +66,7 @@ function App() {
         />
         <Route path='/result' element={<Result client={client} />} />
         <Route path='/scoreboard' element={<ScoreBoard client={client} />} />
+        <Route path='/test' element={<TestQuiz />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

@@ -6,11 +6,10 @@ import SubmitModal from '../../components/ModalSubmit/Submit';
 import Timer from '../../components/Timer/Timer';
 import './Quiz.scss';
 import logo from '../../../src/images/miniLogo.png';
-import MobileQuiz from './MobileQuiz';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import TimerQuiz from '../../components/Timer/TimerQuiz';
-const Quiz = ({ client }) => {
+
+const TestQuiz = ({ client }) => {
   const [modalShow, setModalShow] = useState(false);
   const [active, setActive] = useState('');
   const [answer, setAnswer] = useState([
@@ -46,9 +45,11 @@ const Quiz = ({ client }) => {
       studentID: JSON.parse(localStorage.getItem('userQuiz')).studentID,
       answer: JSON.parse(localStorage.getItem('userAnswer')),
     };
+    console.log('result : ', result);
     client
       .put('/user/end', result)
       .then((res) => {
+        console.log(res);
         navigate('/result');
       })
       .catch((e) => console.log(e));
@@ -67,8 +68,7 @@ const Quiz = ({ client }) => {
           </div>
           <div className='challenge_nav_timer'>
             <h2>Thời gian</h2>
-            {/* <Timer /> */}
-            <TimerQuiz handleNavigate={handleNavigate} />
+            <Timer />
           </div>
 
           <div className='challenge_nav_numQuestion'>
@@ -117,9 +117,9 @@ const Quiz = ({ client }) => {
                   <div className='challenge_questions_title'>
                     {item.question.map((ques, index) =>
                       JSON.stringify(ques).match('/images/[a-zA-Z0-9.]{1,}') ? (
-                        <img src={item.question[index]} key={index} />
+                        <img src={item.question[index]} />
                       ) : (
-                        <div key={index}>{ques}</div>
+                        <div>{ques}</div>
                       )
                     )}
                   </div>
@@ -165,22 +165,8 @@ const Quiz = ({ client }) => {
           onClick={handleNavigate}
         />
       </div>
-      <MobileQuiz client={client} />
-
-      <ToastContainer
-        position='top-right'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable={false}
-        pauseOnHover={false}
-        theme='light'
-      />
     </>
   );
 };
 
-export default Quiz;
+export default TestQuiz;

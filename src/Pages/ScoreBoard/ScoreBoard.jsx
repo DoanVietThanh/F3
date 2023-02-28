@@ -5,14 +5,14 @@ import miniLogo from '../../../src/images/miniLogo.png';
 const ScoreBoard = ({ client }) => {
   let [listUsers, setListUsers] = useState([]);
   let [rankUser, setRankUser] = useState();
+
   useEffect(() => {
     client
       .get('/user/scoreboard')
       .then((res) => {
+        console.log(res.data.data.users);
         setListUsers(res.data.data.users);
-        console.log(res.data);
-
-        listUsers.map((item, index) =>
+        res.data.data.users.map((item, index) =>
           item.studentID ==
           JSON.parse(localStorage.getItem('userQuiz')).studentID
             ? handleRankUser(item)
@@ -23,10 +23,9 @@ const ScoreBoard = ({ client }) => {
   }, []);
 
   const handleRankUser = (item) => {
-    localStorage.getItem('rankUser')
-      ? setRankUser(JSON.parse(localStorage.getItem('rankUser')))
-      : setRankUser(item.rank);
-    localStorage.setItem('rankUser', JSON.stringify(rankUser));
+    console.log('rank' + item.rank);
+    setRankUser(item.rank);
+    localStorage.setItem('rankUser', JSON.stringify(item.rank));
   };
 
   const secondsToHms = (duration) => {
@@ -34,16 +33,15 @@ const ScoreBoard = ({ client }) => {
       seconds = Math.floor((duration / 1000) % 60),
       minutes = Math.floor((duration / (1000 * 60)) % 60),
       hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
     hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-
     return hours > 0
       ? hours + ':' + minutes + ':' + seconds
       : minutes + ':' + seconds;
   };
 
+  console.log(rankUser);
   return (
     <div className='scoreboard'>
       <div className='scoreboard-logo'>
@@ -53,7 +51,11 @@ const ScoreBoard = ({ client }) => {
         Bảng xếp hạng <span style={{ color: '#33BD64' }}>IQ Challenge</span>
       </p>
       <p className='scoreboard-rank'>
-        Bạn đang ở <span style={{ color: '#F9AF0B' }}>hạng {rankUser}</span>
+        {/* Bạn đang ở <span style={{ color: '#F9AF0B' }}>hạng {rankUser}</span> */}
+        Bạn đang ở{' '}
+        <span style={{ color: '#F9AF0B' }}>
+          hạng {localStorage.getItem('rankUser')}
+        </span>
       </p>
       <table className='scoreboard-table'>
         <tbody className='scoreboard-table-info'>
@@ -64,23 +66,25 @@ const ScoreBoard = ({ client }) => {
           <td>Thời gian</td>
         </tbody>
         {listUsers.map((listUser, index) =>
-          rankUser == listUser.rank ? (
-            <tbody key={listUser._id} className='scoreboard-active'>
-              <td>{listUser.rank}</td>
-              <td>{listUser.name}</td>
-              <td>{listUser.studentID}</td>
-              <td>{listUser.score}</td>
-              <td>{secondsToHms(listUser.time)}</td>
-            </tbody>
-          ) : (
-            <tbody key={listUser._id}>
-              <td>{listUser.rank}</td>
-              <td>{listUser.name}</td>
-              <td>{listUser.studentID}</td>
-              <td>{listUser.score}</td>
-              <td>{secondsToHms(listUser.time)}</td>
-            </tbody>
-          )
+          rankUser == listUser.rank
+            ? listUser.time && (
+                <tbody key={listUser._id} className='scoreboard-active'>
+                  <td>{listUser.rank}</td>
+                  <td>{listUser.name}</td>
+                  <td>{listUser.studentID}</td>
+                  <td>{listUser.score}</td>
+                  <td>{secondsToHms(listUser.time)}</td>
+                </tbody>
+              )
+            : listUser.time && (
+                <tbody key={listUser._id}>
+                  <td>{listUser.rank}</td>
+                  <td>{listUser.name}</td>
+                  <td>{listUser.studentID}</td>
+                  <td>{listUser.score}</td>
+                  <td>{secondsToHms(listUser.time)}</td>
+                </tbody>
+              )
         )}
       </table>
     </div>

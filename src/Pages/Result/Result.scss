@@ -78,6 +78,17 @@
       margin: 0;
       flex-direction: column;
     }
+    &-info {
+      margin: -4px;
+      padding: 0 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &-title {
+        width: 500px;
+      }
+    }
     &-cup {
       display: flex;
       justify-content: center;

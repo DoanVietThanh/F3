@@ -6,19 +6,18 @@ import SubmitModal from '../../components/ModalSubmit/Submit';
 import Timer from '../../components/Timer/Timer';
 import './MobileQuiz.scss';
 
-const MobileQuiz = ({
-  client,
-  handleNavigate,
-  answerOptions,
-  numOfQuestion,
-  answer,
-  setAnswer,
-}) => {
+const MobileQuiz = ({ client }) => {
+  const [answer, setAnswer] = useState([
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ]);
   const navigate = useNavigate();
   const questionList = [...JSON.parse(localStorage.getItem('questionQuiz'))];
   const [current, setCurrent] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState();
   const [checkRadio, setCheckRadio] = useState(false);
+  const answerOptions = ['A', 'B', 'C', 'D', 'E'];
+  const numOfQuestion = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
   useEffect(() => {
     setCurrentQuestion(questionList[current]);
   }, [current]);
@@ -35,8 +34,25 @@ const MobileQuiz = ({
     setCheckRadio();
   };
 
-  console.log(questionList[current]);
-  console.log(answer);
+  const handleNavigate = () => {
+    var result;
+    localStorage.setItem('userAnswer', JSON.stringify(answer));
+    result = {
+      name: JSON.parse(localStorage.getItem('userQuiz')).name,
+      studentID: JSON.parse(localStorage.getItem('userQuiz')).studentID,
+      answer: JSON.parse(localStorage.getItem('userAnswer')),
+    };
+    // console.log('result : ', result);
+    client
+      .put('/user/end', result)
+      .then((res) => {
+        console.log(res);
+        navigate('/result');
+      })
+      .catch((e) => console.log(e));
+  };
+
+  // console.log(answer);
   return (
     <div className='mobile_quiz'>
       <header className='mobile_header'>
@@ -50,7 +66,7 @@ const MobileQuiz = ({
               key={index}
               onClick={() => setCurrent(index)}
             >
-              <a key={index} href={`#${index + 1}`}>
+              <a key={index} href='#'>
                 Câu {num}
               </a>
             </div>
@@ -83,14 +99,14 @@ const MobileQuiz = ({
                 <input
                   type='radio'
                   value={index}
-                  name={questionList[current]._id}
-                  id={`${questionList[current]._id}_${index}`}
+                  name={`${questionList[current]._id}thanh`}
+                  id={`${questionList[current]._id}_${index}thanh`}
                   onClick={() => {
                     saveAnswerMobile(current, index);
                   }}
                 />
                 <label
-                  htmlFor={`${questionList[current]._id}_${index}`}
+                  htmlFor={`${questionList[current]._id}_${index}thanh`}
                   className={`${checkRadio && 'active'}`}
                 >
                   <div className='mobile_body_aphabet'>

@@ -13,12 +13,27 @@ const Result = ({ client }) => {
       .get(`/user/${JSON.parse(localStorage.getItem('userQuiz')).studentID}`)
       .then((res) => {
         setScore(res.data.data.score);
-        setTime(res.data.data.time);
+        // setTime(Math.floor(res.data.data.time / 1000));
+        setTime(secondsToHms(res.data.data.time));
         // localStorage.clear();
       })
       .catch((e) => console.log(e));
   }, []);
 
+  const secondsToHms = (duration) => {
+    var milliseconds = Math.floor((duration % 1000) / 100),
+      seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60),
+      hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    return hours > 0
+      ? hours + ':' + minutes + ':' + seconds
+      : minutes + ':' + seconds;
+  };
   console.log(score, time);
   return (
     <div className='result-container'>
@@ -44,7 +59,7 @@ const Result = ({ client }) => {
           <div className='result-achievement'>
             <div className='result-achievement-desc'>
               <span>Thời gian hoàn thành</span>
-              <span style={{ color: '#33BD64' }}>{time} giây</span>
+              <span style={{ color: '#33BD64' }}>{time} </span>
             </div>
             <div className='result-achievement-desc'>
               <span>Số câu trả lời đúng</span>
