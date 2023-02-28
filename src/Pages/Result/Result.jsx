@@ -34,7 +34,6 @@ const Result = ({ client }) => {
       ? hours + ':' + minutes + ':' + seconds
       : minutes + ':' + seconds;
   };
-  console.log(score, time);
   return (
     <div className='result-container'>
       <div className='logoResult'>

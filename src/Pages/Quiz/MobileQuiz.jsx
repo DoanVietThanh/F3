@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import miniLogo from '../../../src/images/miniLogo.png';
 import SubmitModal from '../../components/ModalSubmit/Submit';
-import Timer from '../../components/Timer/Timer';
+import TimerQuiz from '../../components/Timer/TimerQuiz';
 import './MobileQuiz.scss';
 
 const MobileQuiz = ({ client }) => {
@@ -15,6 +14,7 @@ const MobileQuiz = ({ client }) => {
   const [current, setCurrent] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState();
   const [checkRadio, setCheckRadio] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const answerOptions = ['A', 'B', 'C', 'D', 'E'];
   const numOfQuestion = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
@@ -42,17 +42,14 @@ const MobileQuiz = ({ client }) => {
       studentID: JSON.parse(localStorage.getItem('userQuiz')).studentID,
       answer: JSON.parse(localStorage.getItem('userAnswer')),
     };
-    // console.log('result : ', result);
     client
       .put('/user/end', result)
       .then((res) => {
-        console.log(res);
         navigate('/result');
       })
       .catch((e) => console.log(e));
   };
-
-  // console.log(answer);
+  console.log(answer);
   return (
     <div className='mobile_quiz'>
       <header className='mobile_header'>
@@ -72,11 +69,10 @@ const MobileQuiz = ({ client }) => {
             </div>
           ))}
         </div>
-        <Timer />
+        <TimerQuiz handleNavigate={handleNavigate} />
       </header>
-
-      <body className='mobile_body'>
-        <p>Câu {current + 1} :</p>
+      <div className='mobile_body'>
+        <p style={{ fontWeight: '700' }}>Câu {current + 1} :</p>
         <div className=''>
           {questionList[current].question.map((ques, index) =>
             JSON.stringify(ques).match('/images/[a-zA-Z0-9.]{1,}') ? (
@@ -87,7 +83,7 @@ const MobileQuiz = ({ client }) => {
                 src={questionList[current].question[index]}
               />
             ) : (
-              <div>{ques}</div>
+              <div key={index}>{ques}</div>
             )
           )}
         </div>
@@ -118,8 +114,7 @@ const MobileQuiz = ({ client }) => {
             ))}
           </form>
         </div>
-      </body>
-
+      </div>
       <footer className='mobile_footer'>
         <div>
           {current != questionList.length - 1 ? (
@@ -127,12 +122,22 @@ const MobileQuiz = ({ client }) => {
               Tiếp tục
             </button>
           ) : (
-            <button onClick={handleNavigate} className='mobile_btn'>
+            <button
+              onClick={() => setModalShow(true)}
+              data-toggle='modal'
+              data-target='#exampleModalCenter'
+              className='mobile_btn'
+            >
               Nộp bài
             </button>
           )}
         </div>
-      </footer>
+      </footer>{' '}
+      <SubmitModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onClick={handleNavigate}
+      />
     </div>
   );
 };

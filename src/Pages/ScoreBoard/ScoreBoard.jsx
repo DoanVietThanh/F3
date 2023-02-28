@@ -10,7 +10,7 @@ const ScoreBoard = ({ client }) => {
     client
       .get('/user/scoreboard')
       .then((res) => {
-        console.log(res.data.data.users);
+        // console.log(res.data.data.users);
         setListUsers(res.data.data.users);
         res.data.data.users.map((item, index) =>
           item.studentID ==
@@ -23,7 +23,6 @@ const ScoreBoard = ({ client }) => {
   }, []);
 
   const handleRankUser = (item) => {
-    console.log('rank' + item.rank);
     setRankUser(item.rank);
     localStorage.setItem('rankUser', JSON.stringify(item.rank));
   };
@@ -41,7 +40,6 @@ const ScoreBoard = ({ client }) => {
       : minutes + ':' + seconds;
   };
 
-  console.log(rankUser);
   return (
     <div className='scoreboard'>
       <div className='scoreboard-logo'>
@@ -51,41 +49,44 @@ const ScoreBoard = ({ client }) => {
         Bảng xếp hạng <span style={{ color: '#33BD64' }}>IQ Challenge</span>
       </p>
       <p className='scoreboard-rank'>
-        {/* Bạn đang ở <span style={{ color: '#F9AF0B' }}>hạng {rankUser}</span> */}
         Bạn đang ở{' '}
         <span style={{ color: '#F9AF0B' }}>
           hạng {localStorage.getItem('rankUser')}
         </span>
       </p>
       <table className='scoreboard-table'>
-        <tbody className='scoreboard-table-info'>
-          <td>Top</td>
-          <td>Họ tên</td>
-          <td>MSSV</td>
-          <td>Điểm</td>
-          <td>Thời gian</td>
+        <thead className='scoreboard-table-info'>
+          <tr>
+            <th>Top</th>
+            <th>Họ tên</th>
+            <th>MSSV</th>
+            <th>Điểm</th>
+            <th>Thời gian</th>
+          </tr>
+        </thead>
+        <tbody>
+          {listUsers.map((listUser, index) =>
+            rankUser == listUser.rank
+              ? listUser.time && (
+                  <tr key={listUser._id} className='scoreboard-active'>
+                    <td>{listUser.rank}</td>
+                    <td>{listUser.name}</td>
+                    <td>{listUser.studentID}</td>
+                    <td>{listUser.score}</td>
+                    <td>{secondsToHms(listUser.time)}</td>
+                  </tr>
+                )
+              : listUser.time && (
+                  <tr key={listUser._id}>
+                    <td>{listUser.rank}</td>
+                    <td>{listUser.name}</td>
+                    <td>{listUser.studentID}</td>
+                    <td>{listUser.score}</td>
+                    <td>{secondsToHms(listUser.time)}</td>
+                  </tr>
+                )
+          )}
         </tbody>
-        {listUsers.map((listUser, index) =>
-          rankUser == listUser.rank
-            ? listUser.time && (
-                <tbody key={listUser._id} className='scoreboard-active'>
-                  <td>{listUser.rank}</td>
-                  <td>{listUser.name}</td>
-                  <td>{listUser.studentID}</td>
-                  <td>{listUser.score}</td>
-                  <td>{secondsToHms(listUser.time)}</td>
-                </tbody>
-              )
-            : listUser.time && (
-                <tbody key={listUser._id}>
-                  <td>{listUser.rank}</td>
-                  <td>{listUser.name}</td>
-                  <td>{listUser.studentID}</td>
-                  <td>{listUser.score}</td>
-                  <td>{secondsToHms(listUser.time)}</td>
-                </tbody>
-              )
-        )}
       </table>
     </div>
   );

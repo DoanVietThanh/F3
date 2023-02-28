@@ -45,10 +45,10 @@ const ReadyQuiz = ({ client, user, question, setQuestion }) => {
           progress: undefined,
           theme: 'light',
         });
-        console.log(response);
+        // console.log(response);
         temp = response.data.data.questions;
         localStorage.setItem('questionQuiz', JSON.stringify(temp));
-        console.log('temp: ', temp);
+        // console.log('temp: ', temp);
         setQuestion([...temp]);
         navigate('/quiz');
       })
